@@ -13,5 +13,5 @@ heroku create
 git push herou master // d0nE
 heroku open //to open in browser
 
-
-
+--to pull code from heroku repo
+heroku git:clone -a fast-oasis-61158
