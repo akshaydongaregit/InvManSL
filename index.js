@@ -29,4 +29,6 @@ var movies = require('./movies.js');
 //Use the Router on the sub route /movies
 app.use('/movies', movies);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000 , function(){
+    console.log(" started app on "+process.env.PORT +" / 3000");
+});
