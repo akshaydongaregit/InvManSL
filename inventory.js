@@ -1,16 +1,16 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+var db = require("./db");
 
-router.get('/all', function(req, res, next) {
-	connection.query('select * from items', function (error, results, fields) {
-		if (error) throw error;
-		res.json({"status": 200, "error": null, "response": results});
-	});
+router.get("/listItems",function(req,res){
+  var pool = db.getConnection();
+  pool.query("select * from items" , function(err,data){
+    if(err!=undefined)
+        res.json(err);
+    else    
+        res.json(data.rows);
+        
+  });
 });
 
-router.get('/add', function(req, res, next) {
-	res.json("Added Sucess");
-});
-
-
-module.exports = router;
+module.exports = router ;
