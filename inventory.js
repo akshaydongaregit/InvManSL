@@ -13,4 +13,18 @@ router.get("/items",function(req,res){
   });
 });
 
+router.post("/add" , function(req,res){
+  let query = 'insert into items values($1,$2,$3,$4,$5,$5,$6,$7,$8)'
+  let values = Object.values(req.body);
+
+  var pool = db.getConnection();
+  pool.query(query,values,function(err, data){
+    if(err!=undefined)
+      res.json(err)
+    else
+      res.json(data);
+  });
+
+});
+
 module.exports = router ;
