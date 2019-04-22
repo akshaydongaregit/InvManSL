@@ -1,0 +1,5 @@
+base url : https://invmansl.herokuapp.com/
+
+end points
+inventory/items [GET]
+inventory/add [POST]
