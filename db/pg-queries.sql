@@ -25,3 +25,7 @@ insert into items values(1,'Wheet','P1','Kilo',100,76,'','');
 insert into items values(2,'Rice','P2','Kilo',220,80,'','');
 
 select * from items;
+
+-- upadte qq
+CREATE SEQUENCE items_id_seq START WITH 12345; -- replace 12345 with max above
+ALTER TABLE itmes ALTER COLUMN id SET DEFAULT nextval('itmes_id_seq');
