@@ -27,4 +27,19 @@ router.post("/add" , function(req,res){
 
 });
 
+router.get("/delete",function(req,res){
+  let query = 'delete from items where id = $1'
+  let values = Object.values(req.query);
+  console.log(req.query);
+
+  var pool = db.getConnection();
+  pool.query(query,values,function(err, data){
+    if(err!=undefined)
+      res.json(err)
+    else
+      res.json(data);
+  });
+  
+});
+
 module.exports = router ;
