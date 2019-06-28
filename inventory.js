@@ -14,12 +14,14 @@ router.get("/items",function(req,res){
 });
 
 router.post("/add" , function(req,res){
-  let query = 'insert into items values($1,$2,$3,$4,$5,$5,$6,$7,$8)'
+  let query = 'insert into items(name,code,unit,quantity,price,descp,category) values($1,$2,$3,$4,$5,$6,$7)'
   let values = Object.values(req.body);
-
+  console.log(JSON.stringify(values));
+  
   var pool = db.getConnection();
   pool.query(query,values,function(err, data){
-    if(err!=undefined)
+    console.log('err:'+JSON.stringify(err)+' data'+JSON.stringify(data));
+	if(err!=undefined)
       res.json(err)
     else
       res.json(data);
@@ -27,10 +29,27 @@ router.post("/add" , function(req,res){
 
 });
 
-router.get("/delete",function(req,res){
-  let query = 'delete from items where id = $1'
-  let values = Object.values(req.query);
-  console.log(req.query);
+router.get("/delete/:id",function(req,res){
+  let query = 'delete from items where id = $1'; //+req.params.id;
+  let values = [req.params.id];
+  console.log(JSON.stringify(values));
+
+  var pool = db.getConnection();
+  pool.query(query,values,function(err, data){
+    console.log('err:'+JSON.stringify(err)+' data'+JSON.stringify(data));
+    if(err!=undefined)
+      res.json(err)
+    else
+      res.json(data);
+  });
+  
+});
+
+
+router.post("/update",function(req,res){
+  let query = 'update items set  name=$1,code=$2,unit=$3,quantity=$4,price=$5,descp=$6,category=$7 where id = $8'
+  let values = Object.values(req.body);
+  console.log(values);
 
   var pool = db.getConnection();
   pool.query(query,values,function(err, data){
